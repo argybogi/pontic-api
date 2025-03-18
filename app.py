@@ -29,19 +29,19 @@ def get_history():
 # Route για να ελέγξεις αν το API είναι online
 @app.route("/", methods=["GET"])
 def home():
-    return jsonify({"message": "Pontic API is live!"})
+    return jsonify({"message": "Pontic API is live!"}), 200, {'Content-Type': 'application/json; charset=utf-8'}
 
 # Endpoint για τα τραγούδια
 @app.route('/api/songs', methods=['GET'])
 def api_songs():
-    return jsonify(get_songs())
+    return jsonify(get_songs()), 200, {'Content-Type': 'application/json; charset=utf-8'}
 
 # Endpoint για τα ιστορικά γεγονότα
 @app.route('/api/history', methods=['GET'])
 def api_history():
-    return jsonify(get_history())
+    return jsonify(get_history()), 200, {'Content-Type': 'application/json; charset=utf-8'}
 
 # Εκκίνηση της εφαρμογής
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Χρησιμοποιεί το PORT από το Render
+    port = int(os.environ.get("PORT", 5000))  # Χρησιμοποιεί το PORT που δίνει το Render
     app.run(host="0.0.0.0", port=port, debug=True)
