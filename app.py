@@ -1,7 +1,12 @@
 from flask import Flask, jsonify
 import sqlite3
+import os
 
 app = Flask(__name__)
+
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({"message": "Pontic API is live!"})
 
 # Συνάρτηση για ανάκτηση τραγουδιών
 def get_songs():
@@ -28,4 +33,5 @@ def api_history():
 
 # Εκκίνηση του API
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
